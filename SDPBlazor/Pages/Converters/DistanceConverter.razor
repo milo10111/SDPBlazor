@@ -1,0 +1,29 @@
+﻿<h3>Component</h3>
+<label for="meter" class="form-label">Meters</label>
+<input type="number" class="form-control" id="meter" placeholder="Meters..." @bind="Meters" @bind:event="oninput" />
+
+@if (_inches !=null)
+{
+    <div class="mt-4">
+        <label for="przelicznik" class="form-label">Przelicznik...</label>
+        <input type="number" class="form-control" id="przelicznik">
+        <span>In @OnParametersSet m equal to @_inches inches</span>
+    </div>
+}
+@code {
+    [Parameter]
+    public double DistanceFactor { get; set; }
+    double? _meters = null;
+    double? _inches = null;
+
+    double? Meters
+    {
+        get => _meters;
+        set
+        {
+            _meters = value;
+            _inches = value / DistanceFactor;
+        }
+    }
+
+}

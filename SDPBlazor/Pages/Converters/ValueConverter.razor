@@ -1,0 +1,33 @@
+﻿<h3>ValueConverter</h3>
+<label for="value" class="form-label">Value</label>
+<input type="number" class="form-control" id="dolar" placeholder="Dolars..." @bind="_dolars" @bind:event="oninput" />
+<input type="number" class="form-control" id="conversion-ratio" placeholder="Conversion ratio... Default: 4,59" @bind="_convR" @bind:event="oninput" />
+
+<button type="submit" class="btn btn-primary mt-4" @onclick="ConvertValue">
+    <span class="oi oi oi-calculator me-2" aria-hidden="true"></span>Convert
+</button>
+@if (_zlotys != null)
+{
+    <div class="mt-4">
+        <span>@_dolars $ = @_zlotys Polish zloty</span>
+    </div>
+}
+@code {
+    double? _zlotys = null;
+    double? _dolars = null;
+    double? _convR = null;
+    double defaultConvR = 4.59;
+
+    private void ConvertValue()
+    {
+        if(_convR != null)
+        {
+            _zlotys = _dolars * _convR;
+        }
+        else
+        {
+            _zlotys = _dolars * defaultConvR;
+        }
+    }
+
+}

@@ -1,0 +1,26 @@
+﻿
+
+<h3>TimeConverter</h3>
+
+<div>
+    <label for="hour" class="form-label">Hour</label>
+    <input type="number" class="form-control" id="hour" placeholder="Hours..." @bind="_hours" />
+</div>
+<button type="submit" class="btn btn-primary mt-4" @onclick="ConvertTime">
+    <span class="oi oi oi-clock me-2" aria-hidden="true"></span>Convert
+</button>
+@if(_seconds != null)
+{
+    <div class="mt-4">
+    <span> In @_hours hours we have @_seconds seconds.</span>
+    </div>
+}
+@code {
+    int? _seconds = null;
+    int? _hours = null;
+
+    private void ConvertTime()
+    {
+        _seconds = _hours * 3600;
+    }
+}
